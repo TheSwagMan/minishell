@@ -6,7 +6,7 @@
 /*   By: tpotier <tpotier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 17:44:38 by tpotier           #+#    #+#             */
-/*   Updated: 2020/03/04 17:53:51 by tpotier          ###   ########.fr       */
+/*   Updated: 2020/03/07 20:43:33 by tpotier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@
 # include "libft.h"
 
 # define BUFFER_SIZE 255
+
+extern char		**environ;
 
 #endif

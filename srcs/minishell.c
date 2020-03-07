@@ -6,7 +6,7 @@
 /*   By: tpotier <tpotier@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/04 17:43:49 by tpotier           #+#    #+#             */
-/*   Updated: 2020/03/04 18:20:07 by tpotier          ###   ########.fr       */
+/*   Updated: 2020/03/07 20:50:26 by tpotier          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,16 @@ int		strcat_realloc(char **str, char *cat)
 	return (1);
 }
 
+void	prompt_show(void)
+{
+	ft_putstr("$> ");
+}
+
 void	handle_sigint(int sig)
 {
 	(void)sig;
-	ft_putstr("\n$> ");
+	ft_putstr("\n");
+	prompt_show();
 }
 
 char	*get_next_command(void)
@@ -73,11 +79,10 @@ char	*get_next_command(void)
 void	exec_app(char *app)
 {
 	char* argv[] = {app, NULL};
-	char* envp[] = {"ok", NULL };
 	(void)app;
 	if (fork() == 0)
 	{
-		execve(app, argv, envp);
+		execve(app, argv, environ);
 		ft_putendl("Error");
 		exit(0);
 	}
@@ -94,7 +99,7 @@ int		main(int ac, char **av)
 	signal(SIGINT, handle_sigint);
 	while (1)
 	{
-		ft_putstr("$> ");
+		prompt_show();
 		cmd = get_next_command();
 		if (!cmd)
 		{
