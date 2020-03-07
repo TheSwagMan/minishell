@@ -13,4 +13,10 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# include <signal.h>
+# include <sys/wait.h>
+# include "libft.h"
+
+# define BUFFER_SIZE 255
+
 #endif
