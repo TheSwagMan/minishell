@@ -6,7 +6,7 @@
 #    By: tpotier <tpotier@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/03/04 17:41:53 by tpotier           #+#    #+#              #
-#    Updated: 2020/03/04 17:41:55 by tpotier          ###   ########.fr        #
+#    Updated: 2020/03/09 11:30:55 by tpotier          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,11 @@ LIBFTDIR = libft/
 LIBFT = $(LIBFTDIR)libft.a
 LIBFTINC = $(LIBFTDIR)incs/
 LIBFTFLAGS = -L$(LIBFTDIR) -lft
-#LIBLSTDIR = liblst/
-#LIBLST = $(LIBLSTDIR)liblst.a
-#LIBLSTINC = $(LIBLSTDIR)incs/
-#LIBLSTFLAGS = -L$(LIBLSTDIR) -llst
-#CFLAGS = -Wall -Wextra -Werror -I$(IDIR) -I$(LIBFTINC) -I$(LIBLSTINC) -MMD -MP
-CFLAGS = -Wall -Wextra -Werror -I$(IDIR) -I$(LIBFTINC) -MMD -MP
+LIBLSTDIR = liblst/
+LIBLST = $(LIBLSTDIR)liblst.a
+LIBLSTINC = $(LIBLSTDIR)incs/
+LIBLSTFLAGS = -L$(LIBLSTDIR) -llst
+CFLAGS = -Wall -Wextra -Werror -I$(IDIR) -I$(LIBFTINC) -I$(LIBLSTINC) -MMD -MP
 
 SRCS = $(addprefix $(SDIR), $(addsuffix .c, $(FILES)))
 INCS = $(addprefix $(IDIR), $(IFILES))
@@ -40,20 +39,20 @@ $(LIBFT):
 $(LIBLST):
 	make -C $(LIBLSTDIR)
 
-$(NAME): $(OBJS) $(LIBFT) #$(LIBLST)
-	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LIBFTFLAGS) #$(LIBLSTFLAGS)
+$(NAME): $(OBJS) $(LIBFT) $(LIBLST)
+	$(CC) -o $@ $(OBJS) $(CFLAGS) $(LIBFTFLAGS) $(LIBLSTFLAGS)
 
 %.o: %.c
 	$(CC) -o $@ -c $< $(CFLAGS)
 
 clean:
 	make -C $(LIBFTDIR) $@
-	#make -C $(LIBLSTDIR) $@
+	make -C $(LIBLSTDIR) $@
 	rm -f $(OBJS) $(DEPS)
 
 fclean: clean
 	make -C $(LIBFTDIR) $@
-	#make -C $(LIBLSTDIR) $@
+	make -C $(LIBLSTDIR) $@
 	rm -f $(NAME)
 
 re: fclean all
